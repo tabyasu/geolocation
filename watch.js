@@ -1,12 +1,13 @@
 ﻿window.addEventListener('DOMContentLoaded',
   function() {
     // 結果の表示先（<div>要素）を取得
-    var latitude = document.querySelector('#latitude');
+    var latitude  = document.querySelector('#latitude');
     var longitude = document.querySelector('#longitude');
-    var heading = document.querySelector('#heading');
-    var speed = document.querySelector('#speed');
-    var time = document.querySelector('#time');
-    var stop = document.querySelector('#stop');
+    var heading   = document.querySelector('#heading');
+    var speed     = document.querySelector('#speed');
+    var timeH     = document.querySelector('#time_hours');
+    var timeM     = document.querySelector('#time_minutes');
+    var stop      = document.querySelector('#stop');
     // Geolocation APIが利用できるかを判定
     if (navigator.geolocation) {
       // 現在の位置情報を定期的に取得
@@ -17,7 +18,12 @@
           longitude.innerHTML = pos.coords.longitude;
           heading.innerHTML = pos.coords.heading;
           speed.innerHTML = pos.coords.speed;
-          time.innerHTML = pos.timestamp;
+          var date = pos.timestamp;
+          if( typeof(date) == "number" ) {
+                date = new Date(date);
+                timeH.innerHTML = date.getHours();
+                timeM.innerHTML = date.getMinutes();
+          }
         },
         // 位置情報の取得に失敗した場合の処理
         function(err) {
