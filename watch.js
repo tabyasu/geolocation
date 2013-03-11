@@ -14,10 +14,10 @@
       var id = navigator.geolocation.watchPosition(
         // 位置情報の取得に成功した場合の処理
         function(pos) {
-          latitude.innerHTML = pos.coords.latitude;
+          latitude.innerHTML  = pos.coords.latitude;
           longitude.innerHTML = pos.coords.longitude;
-          heading.innerHTML = pos.coords.heading;
-          speed.innerHTML = pos.coords.speed;
+          heading.innerHTML   = Math.floor(pos.coords.heading);
+          speed.innerHTML     = (pos.coords.speed * 1.9438444924422).toFixed(1);
           var date = pos.timestamp;
           if( typeof(date) == "number" ) {
                 date = new Date(date);
